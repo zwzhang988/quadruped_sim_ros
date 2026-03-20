@@ -1,12 +1,6 @@
-# Legged Robot 🦿🤖
+# Legged Robot
 
 ![Legged_Robot_Repo.png](Legged_Robot_Repo.png)
-
-
-## $`\textcolor{blue}{\text{Attention: Important Remark}}`$ 
-
-The contents of this repository have been tested from scratch on four different computers running Ubuntu 20.04 without any issues. Therefore, following our steps below should not cause any problems. If you encounter any issues, please contact us immediately at jinjun.dong@tum.de. 🍀🤠🎋
-
 
 ## Table of Contents
 
@@ -20,9 +14,6 @@ The contents of this repository have been tested from scratch on four different 
 6. [RQT Graph](#rqt-graph)
 7. [Documentation](#documentation)
 8. [Authors](#authors)
-
-
-
 
 ## Task Description
 
@@ -182,41 +173,6 @@ roslaunch teleop_pkg teleop.launch
 
 ## RQT Graph
 
-
 ![rosgraph.png](images/rosgraph.png)
 
-
-## Documentation
-
-We store our documentation (final written reports and the video of project outcomes) in a Google Drive folder. You can click to open, view, and download them in the following links:
-
-* **Final Report**: https://docs.google.com/document/d/1zHIq2PLuyE7osk-6vIE6WIapmTZ-6XciOl30jyWHWds/edit?usp=drive_link
-
-* **Presentation Slides**: https://docs.google.com/presentation/d/12_OfTHpokygqL9W1rPDTf8AksCno3wDC2FlGy2Xn7Ao/edit?usp=sharing
-
-* **Video of Legged Robot(×6)**: https://drive.google.com/file/d/1ZXnwHM7MFsrFwFMi2KMtJ6_MZu02--am/view?usp=drive_link
-
-* **Gantt Chart**: https://docs.google.com/spreadsheets/d/1nmKPpE6cp1iwdo1hl-LOo3sB8z7KLcxG/edit?usp=drive_link&ouid=103277388812761575294&rtpof=true&sd=true
-
-## Authors
-
-* **Gräbner, Theresa**
-    * Email Address: [theresa.graebner@tum.de](mailto:theresa.graebner@tum.de)
-    * GitLab Account: [@00000000014A5A0A](https://gitlab.lrz.de/00000000014A5A0A)
-
-* **Pham, Quan**
-    * Email Address: [quan.pham@tum.de](mailto:quan.pham@tum.de)
-    * GitLab Account: [@lagessiehcs](https://gitlab.lrz.de/lagessiehcs)
-
-* **Jiang, Hanchong**
-    * Email Address: [hanchong.jiang@tum.de](mailto:hanchong.jiang@tum.de)
-    * GitLab Account: [@00000000014A0921](https://gitlab.lrz.de/00000000014A0921)
-
-* **Zhang, Zongwei**
-    * Email Address: [zongwei.zhang@tum.de](mailto:zongwei.zhang@tum.de)
-    * GitLab Account: [@ge89qah](https://gitlab.lrz.de/ge89qah)
-
-* **Jinjun Dong**
-    * Email Address: [ge26hes@mytum.de](mailto:ge26hes@mytum.de)
-    * GitLab Account: [@00000000014ADEF1](https://gitlab.lrz.de/00000000014ADEF1)
 
