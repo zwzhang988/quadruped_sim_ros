@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- <arg name="use_sim_time"            default="true"/> -->
+
+  <!-- Choose visualization -->
+  <arg name="rtabmapviz"              default="false" />
+  <arg name="rviz"                    default="false" />
+
+  <!-- Localization-only mode -->
+  <arg name="localization"            default="false"/>
+
+  <!-- Corresponding config files -->
+  <arg name="rtabmapviz_cfg"          default="$(find legged_robot_rtabmap)/launch/config/rgbd_gui.ini" />
+  <arg name="rviz_cfg"                default="$(find legged_robot_rtabmap)/launch/config/rgbd.rviz" />
+
+  <arg name="frame_id"                default="body"/>     <!-- Fixed frame id, you may set "base_link" or "base_footprint" if they are published -->
+
+  <arg name="database_path"           default="~/.ros/rtabmap.db"/>
+  <arg name="rtabmap_args"            default="--delete_db_on_start"/>   <!-- delete_db_on_start, udebug -->
+  <arg name="launch_prefix"           default=""/>
+  <arg name="approx_sync"             default="true"/>         <!-- if timestamps of the input topics are not synchronized -->
+
+  <arg name="subscribe_scan"          default="false"/>         <!-- Assuming 2D scan if set, rtabmap will do 3DoF mapping instead of 6DoF -->
+  <arg name="scan_topic"              default="/legged_robot_depth_scan"/>
+
+  <arg name="subscribe_scan_cloud"    default="false"/>         <!-- Assuming 3D scan if set -->
+  <arg name="scan_cloud_topic"        default="/scan_cloud"/>
+
+  <arg name="visual_odometry"         default="true"/>          <!-- Generate visual odometry -->
+  <arg name="odom_topic"              default="/odom"/>         <!-- Odometry topic used if visual_odometry is false -->
+  <arg name="odom_frame_id"           default=""/>              <!-- If set, TF is used to get odometry instead of the topic -->
+
+  <arg name="namespace"               default="rtabmap"/>
+  <arg name="wait_for_transform"      default="1.0"/>
+
+  <include file="$(find legged_robot_rtabmap)/launch/rtabmap.launch">
+    <arg name="rgbd_sync"               value="true"/>
+    <arg name="subscribe_rgbd"          value="true"/>
+
+    <!-- <arg name="rgb_topic"               value="/realsense/rgb/left_image_raw" />
+    <arg name="camera_info_topic"       value="/realsense/rgb/left_image_info" />
+    <arg name="depth_topic"             value="/realsense/depth/image" />
+    <arg name="depth_camera_info_topic" value="/realsense/depth/camera_info" /> -->
+    <arg name="rgb_topic"               value="/legged_robot/rgb/left_image_raw" />
+    <arg name="camera_info_topic"       value="/legged_robot/rgb/left_image_info" />
+    <arg name="depth_topic"             value="/legged_robot/depth/image" />
+    <arg name="depth_camera_info_topic" value="/legged_robot/depth/camera_info" />
+
+
+    <arg name="stereo"                  value="false"/>
+    <arg name="rtabmapviz"              value="$(arg rtabmapviz)" />
+    <arg name="rviz"                    value="$(arg rviz)" />
+    <arg name="localization"            value="$(arg localization)"/>
+    <arg name="gui_cfg"                 value="$(arg rtabmapviz_cfg)" />
+    <arg name="rviz_cfg"                value="$(arg rviz_cfg)" />
+
+    <arg name="frame_id"                value="$(arg frame_id)"/>
+    <arg name="namespace"               value="$(arg namespace)"/>
+    <arg name="database_path"           value="$(arg database_path)"/>
+    <arg name="wait_for_transform"      value="$(arg wait_for_transform)"/>
+    <arg name="rtabmap_args"            value="$(arg rtabmap_args)"/>
+    <arg name="launch_prefix"           value="$(arg launch_prefix)"/>
+    <arg name="approx_sync"             value="$(arg approx_sync)"/>
+
+    <arg name="subscribe_scan"          value="$(arg subscribe_scan)"/>
+    <arg name="scan_topic"              value="$(arg scan_topic)"/>
+
+    <arg name="subscribe_scan_cloud"    value="$(arg subscribe_scan_cloud)"/>
+    <arg name="scan_cloud_topic"        value="$(arg scan_cloud_topic)"/>
+
+    <arg name="visual_odometry"         value="$(arg visual_odometry)"/>
+    <arg name="odom_topic"              value="$(arg odom_topic)"/>
+    <arg name="odom_frame_id"           value="$(arg odom_frame_id)"/>
+    <arg name="odom_args"               value="$(arg rtabmap_args)"/>
+
+
+    <arg name="publish_tf_map"          value="true"/>
+    <arg name="publish_tf_odom"          value="true"/>
+    <arg name="odom_sensor_sync"         value="true"/>
+  </include>
+
+</launch>

@@ -1,0 +1,48 @@
+<launch>
+  <arg name="use_sim_time"            default="true"/>
+
+  <arg name="load_params" default="true" />
+  <arg name="corrupt_state_estimate" default="true" />
+  <arg name="right_image_topic" default="/realsense/rgb/right_image_raw" />
+  <arg name="right_info_topic" default="/realsense/rgb/right_image_info" />
+  <arg name="left_image_topic" default="/realsense/rgb/left_image_raw" />
+  <arg name="left_info_topic" default="/realsense/rgb/left_image_info" />
+  <arg name="depth_image_topic" default="/realsense/depth/image" />
+  <arg name="depth_info_topic" default="/realsense/depth/camera_info" />
+
+  <include file="$(find simulation)/launch/unity_ros.launch" >
+    <arg name="load_params" value="$(arg load_params)" />
+    <arg name="right_image_topic" value="$(arg right_image_topic)" />
+    <arg name="right_info_topic" value="$(arg right_info_topic)" />
+    <arg name="left_image_topic" value="$(arg left_image_topic)" />
+    <arg name="left_info_topic" value="$(arg left_info_topic)" />
+    <arg name="depth_image_topic" value="$(arg depth_image_topic)" />
+    <arg name="depth_info_topic" value="$(arg depth_info_topic)" />
+  </include>
+
+  <node name="Simulation" pkg="simulation" type="RoboDog_Build.x86_64"/>
+
+  <node name="w_to_unity" pkg="simulation" type="w_to_unity"/>
+
+  <node name="legged_robot_time_sync" pkg="legged_robot_rtabmap" type="legged_robot_time_sync"/>
+
+  <arg name="x_trans" value="0.0" />
+  <arg name="y_trans" value="0.0" />
+  <arg name="z_trans" value="0.3" />
+  <arg name="x_ang" value="0" />
+  <arg name="y_ang" value="0" />
+  <arg name="z_ang" value="-1.744" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher"
+    name="world_to_map"      args="0 0 0 0 0 0 /world /map" />
+
+  <node pkg="tf2_ros" type="static_transform_publisher"
+        name="body_to_depth"      args="$(arg x_trans) $(arg y_trans) $(arg z_trans) $(arg x_ang) $(arg y_ang) $(arg z_ang) /body /RoboDog/base_link/SensorHolder/Sensors/DepthCamera " />
+
+  <node pkg="tf2_ros" type="static_transform_publisher"
+      name="body_to_left_cam"      args="$(arg x_trans) $(arg y_trans) $(arg z_trans) $(arg x_ang) $(arg y_ang) $(arg z_ang) /body RoboDog/base_link/SensorHolder/Sensors/RGBCameraLeft " />
+
+  <node pkg="tf2_ros" type="static_transform_publisher"
+      name="body_to_right_cam"      args="$(arg x_trans) $(arg y_trans) $(arg z_trans) $(arg x_ang) $(arg y_ang) $(arg z_ang) /body RoboDog/base_link/SensorHolder/Sensors/RGBCameraRight" />
+
+</launch>

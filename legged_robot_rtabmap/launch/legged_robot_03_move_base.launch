@@ -1,0 +1,31 @@
+<launch>
+
+    <!-- <arg name="use_sim_time"            default="true"/> -->
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="body_to_body2"      
+      args="0 0 0 1.57 0 0 /body /body2 " />
+
+  <node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" args="">
+    <remap from="image"       to="/legged_robot/depth/image"/>
+    <remap from="camera_info" to="/legged_robot/depth/camera_info"/> 
+    <!-- <remap from="scan" to="$(arg laserscan_topic)" /> -->
+
+    <param name="scan_height"     type="int"    value="20"/> 
+    <param name="output_frame_id" type="str"    value="legged_robot_depth_scan"/> 
+  </node>
+
+    <include file="$(find legged_robot_rtabmap)/launch/Config/move_base.launch">
+        <arg name="laserscan_topic" value="scan"/>
+        <arg name="laserscan_frame" value="legged_robot_depth_scan"/>
+
+        <!-- <arg name="robot_base_frame" value="legged_robot_base_link"/> -->
+        <arg name="robot_base_frame" value="body2"/>
+
+      <remap from="map" to="/rtabmap/proj_map"/>
+      <remap from="move_base_simple/goal" to="/planner_goal"/>
+
+    </include>
+    
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find legged_robot_rtabmap)/rviz/nav.rviz"/>
+
+</launch>
